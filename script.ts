@@ -4,8 +4,14 @@ async function main() {
   // Create a new user with a post
   const user = await prisma.user.create({
     data: {
-      name: "Alice",
-      email: "alice@prisma.io",
+      name: "Bob",
+      email: "bob@prisma.io",
+      roles: {
+        create: [
+          { name: "admin" },
+          { name: "editor" },
+        ],
+      },
       // posts: {
       //   create: {
       //     title: "Hello World",
@@ -13,6 +19,9 @@ async function main() {
       //     published: true,
       //   },
       },
+      include: {
+        roles: true,
+      }
     },
     // include: {
     //   posts: true,
